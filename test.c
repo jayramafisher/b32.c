@@ -1,7 +1,8 @@
 
 /**
- * `test.c' - b64
+ * `test.c' - b32
  *
+ * copyright (c) 2016 jay rama fisher
  * copyright (c) 2014 joseph werle
  */
 
@@ -11,7 +12,7 @@
 #include <assert.h>
 #include <ok/ok.h>
 
-#include "b64.h"
+#include "b32.h"
 
 #define S(x) # x
 #define t(m, a, b) ({                                                \
@@ -28,21 +29,21 @@ main (void) {
 
   // encode
   {
-    t(b64_encode, (const unsigned char *) "bradley", "YnJhZGxleQ==");
-    t(b64_encode, (const unsigned char *) "kinkajou", "a2lua2Fqb3U=");
-    t(b64_encode, (const unsigned char *) "vino", "dmlubw==");
-    t(b64_encode,
+    t(b32_encode, (const unsigned char *) "bradley", "MJZGCZDMMV4Q====");
+    t(b32_encode, (const unsigned char *) "kinkajou", "NNUW423BNJXXK===");
+    t(b32_encode, (const unsigned char *) "vino", "OZUW43Y=");
+    t(b32_encode,
         (const unsigned char *) "brian the monkey and bradley the kinkajou are friends",
-        "YnJpYW4gdGhlIG1vbmtleSBhbmQgYnJhZGxleSB0aGUga2lua2Fqb3UgYXJlIGZyaWVuZHM=");
+        "MJZGSYLOEB2GQZJANVXW423FPEQGC3TEEBRHEYLENRSXSIDUNBSSA23JNZVWC2TPOUQGC4TFEBTHE2LFNZSHG===");
   }
 
   // decode
   {
-    t(b64_decode, "Y2FzaWxsZXJv", "casillero");
-    t(b64_decode, "aGF4", "hax");
-    t(b64_decode, "bW9ua2V5cyBhbmQgZG9ncw==", "monkeys and dogs");
-    t(b64_decode,
-        "dGhlIGtpbmtham91IGFuZCBtb25rZXkgZm91Z2h0IG92ZXIgdGhlIGJhbmFuYQ==",
+    t(b32_decode, "MNQXG2LMNRSXE3Y=", "casillero");
+    t(b32_decode, "NBQXQ===", "hax");
+    t(b32_decode, "NVXW423FPFZSAYLOMQQGI33HOM======", "monkeys and dogs");
+    t(b32_decode,
+        "ORUGKIDLNFXGWYLKN52SAYLOMQQG233ONNSXSIDGN52WO2DUEBXXMZLSEB2GQZJAMJQW4YLOME",
         "the kinkajou and monkey fought over the banana");
   }
 
